@@ -95,10 +95,10 @@ for(double x:sumB)sum+=x;
 for (double x : arr)sumA += x;
 double difference=abs(sum-sumUnique);
 //найменший елемент серед об'єднаних
-double min_sum=sumB[0];
+double max_sum=sumB[0];
 for (size_t i=1;i<sumB.size();i++) {
-  if(min_sum>sumB[i])
-  min_sum=sumB[i];
+  if(max_sum<sumB[i])
+  max_sum=sumB[i];
 }
 //запис у json файл
 ofstream JSON("data.json");
@@ -110,7 +110,7 @@ JSON<< fixed << setprecision(3);
 JSON << "\n Сума початкового масиву  " << sumA << "\n Сума масиву без повторів " << sumUnique << "\nСума погрупованого масиву(лишні елементи видалені)\n " << sum <<
 "\n Кількість дублікатів " << dublicate << "\n Різниця суми між погрупованим масивом і масивом без повторів " << difference <<
 "\n Кількість елементів у початковому масиві " << arr.size() << "\nКількість елементів у погрупованому масиві " << sumB.size() <<
-"\nМінмальне значення в погрупованому масиві " << min_sum;
+"\nМаксимальне значення в погрупованому масиві " << max_sum;
 JSON<<"Початковий масив \n";
 for(size_t i=0;i<arr.size();i++)
 JSON<<arr[i]<<" ";
