@@ -47,6 +47,19 @@ for (size_t i = 0; i + unite <= arr.size(); i += unite) {
     
 }
 
+
+ofstream fileB("b.txt");
+if (!fileB) {
+    cout << "Проблема з файлом";
+    return 1;
+}
+fileB << fixed << setprecision(3);
+for (double x : sumB)
+fileB << x << " ";
+
+fileB.close();
+cout << endl << "FileB готовий!\n";
+
 //у порядку зростання
 vector<double>ASC=arr;
 for (size_t i = 0; i < ASC.size()-1; i++) {
