@@ -107,7 +107,7 @@ for(double x:unique)sumUnique+=x;
 for(double x:sumB)sum+=x;
 for (double x : arr)sumA += x;
 double difference=abs(sum-sumUnique);
-//найменший елемент серед об'єднаних
+//найбільший елемент серед об'єднаних
 double max_sum=sumB[0];
 for (size_t i=1;i<sumB.size();i++) {
   if(max_sum<sumB[i])
