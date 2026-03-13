@@ -5,7 +5,8 @@
 #include <cstdlib>
 #include <ctime>
 #include <iomanip> 
-
+#include <nlohmann/json.hpp>
+using json = nlohmann::json;
 using namespace std;
 
 int main() {
@@ -107,46 +108,42 @@ for(double x:unique)sumUnique+=x;
 for(double x:sumB)sum+=x;
 for (double x : arr)sumA += x;
 double difference=abs(sum-sumUnique);
-//найменший елемент серед об'єднаних
+//найбільший елемент серед об'єднаних
 double max_sum=sumB[0];
 for (size_t i=1;i<sumB.size();i++) {
   if(max_sum<sumB[i])
   max_sum=sumB[i];
 }
 //запис у json файл
+json j;
+
+j["sum_initial_array"] = sumA;
+j["sum_without_duplicates"] = sumUnique;
+j["sum_grouped_array"] = sum;
+j["duplicates_count"] = dublicate;
+j["difference_sum"] = difference;
+
+j["initial_array_size"] = arr.size();
+j["grouped_array_size"] = sumB.size();
+j["max_value_grouped_array"] = max_sum;
+
+j["initial_array"] = arr;
+j["ascending_array"] = ASC;
+j["descending_array"] = DESC;
+j["merged_array"] = sumB;
+j["unique_array"] = unique;
+
 ofstream JSON("data.json");
+
 if (!JSON) {
     cout << "Проблема з файлом";
     return 2;
 }
-JSON<< fixed << setprecision(3);
-JSON << "\n Сума початкового масиву  " << sumA << "\n Сума масиву без повторів " << sumUnique << "\nСума погрупованого масиву(лишні елементи видалені)\n " << sum <<
-"\n Кількість дублікатів " << dublicate << "\n Різниця суми між погрупованим масивом і масивом без повторів " << difference <<
-"\n Кількість елементів у початковому масиві " << arr.size() << "\nКількість елементів у погрупованому масиві " << sumB.size() <<
-"\nМаксимальне значення в погрупованому масиві " << max_sum;
-JSON<<"Початковий масив \n";
-for(size_t i=0;i<arr.size();i++)
-JSON<<arr[i]<<" ";
-JSON<<endl;
-JSON << "За зростанням\n";
-for (size_t i = 0; i < ASC.size(); i++)
-    JSON << ASC[i] << " ";
-JSON << endl;
-JSON << "За спаданням \n";
-for (size_t i = 0; i < DESC.size(); i++)
-    JSON << DESC[i] << " ";
-JSON << endl;
-JSON << "Об'єднаний масив\n";
-for (size_t i = 0; i < sumB.size(); i++)
-    JSON << sumB[i] << " ";
-JSON << endl;
-JSON << "Масив без повторів\n";
-for (size_t i = 0; i < unique.size(); i++)
-    JSON << unique[i] << " ";
-JSON << endl;
 
+JSON << setw(4) << j;   // гарний формат JSON
 JSON.close();
-cout<<"Всі дані в data.json";
 
-    return 0;
+cout << "Всі дані в data.json";
+
+return 0;
 }
