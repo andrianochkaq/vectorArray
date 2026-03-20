@@ -17,9 +17,13 @@
 
 ## 📂 Структура
 src/ - основний код
+
 tests/ - юніт-тести
+
 data/ - txt і JSON  файли
+
 json_developer/ - бібліотека JSON 
+
 images/ - скріни
 
 
