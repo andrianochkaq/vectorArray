@@ -1,0 +1,8 @@
+*.exe
+*.obj
+*.log
+*.txt
+*.json
+.vscode/
+.idea/
+build/
